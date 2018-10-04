@@ -1,9 +1,9 @@
 // on doc load
-$(document).ready(function() {
+$(document).ready(function () {
   //=============================================================================================================
   //call to initialize
   var app_firebase = {};
-  (function() {
+  (function () {
     // Initialize Firebase
     var config = {
       apiKey: "AIzaSyCzV3uup5hMyfXqML9oOb81r_dLQcUHlNk",
@@ -23,8 +23,9 @@ $(document).ready(function() {
   var count = 0;
 
   // sidebar button clicks w/api calls
-  $(".button-check").on("click", function() {
-    $(".carousel").carousel({interval:false});
+  $(".button-check").on("click", function () {
+    $(".carousel").carousel({ interval: false });
+    $("#startImage").show();
     $("#startImage").hide();
     var cardId = this.id + "Card";
     var innerId = this.id + "Inner";
@@ -65,7 +66,7 @@ $(document).ready(function() {
       $.ajax({
         url: queryURL,
         method: "GET"
-      }).then(function(response) {
+      }).then(function (response) {
         // After the data comes back from the API
 
         //=========================================================================================================================
@@ -288,18 +289,18 @@ $(document).ready(function() {
         $(".div0").carousel("prev");
         $("#" + cardId).remove();
         this.dataset.state = "inactive";
-        if ( ( $("#giphy").data("state")==="inactive") && ($("#reddit").data("state")==="inactive") &&( $("#stackExchange").data("state")==="inactive") &&( $("#hackerNews").data("state")==="inactive") &&( $("#youTube").data("state")==="inactive" )&&( $("#nyt").data("state")==="inactive")&& $(".carousel-item").hasClass("active")===false){
+        if (($("#giphy").data("state") === "inactive") && ($("#reddit").data("state") === "inactive") && ($("#stackExchange").data("state") === "inactive") && ($("#hackerNews").data("state") === "inactive") && ($("#youTube").data("state") === "inactive") && ($("#nyt").data("state") === "inactive") && $(".carousel-item").hasClass("active") === false) {
           $("#startImage").show();
-        
-        } 
-        
+
+        }
+
       } else {
         $("#" + cardId).remove();
         this.dataset.state = "inactive";
-        if ( ( $("#giphy").data("state")==="inactive") && ($("#reddit").data("state")==="inactive") &&( $("#stackExchange").data("state")==="inactive") &&( $("#hackerNews").data("state")==="inactive") &&( $("#youTube").data("state")==="inactive" )&&( $("#nyt").data("state")==="inactive")&& $(".carousel-item").hasClass("active")===false){
+        if (($("#giphy").data("state") === "inactive") && ($("#reddit").data("state") === "inactive") && ($("#stackExchange").data("state") === "inactive") && ($("#hackerNews").data("state") === "inactive") && ($("#youTube").data("state") === "inactive") && ($("#nyt").data("state") === "inactive") && $(".carousel-item").hasClass("active") === false) {
           $("#startImage").show();
-        
-        } 
+
+        }
       }
     }
   });
@@ -308,9 +309,9 @@ $(document).ready(function() {
   // change urls to array
   //instead of if statements just run code for each variable of
   //===================================================================================================================================
-  $("#search").on("click", function(topicSearch) {
+  $("#search").on("click", function (topicSearch) {
     topicSearch.preventDefault();
-    $(".carousel").carousel({interval:false});
+    $(".carousel").carousel({ interval: false });
 
     var input = $("#addButton")
       .val()
@@ -318,7 +319,7 @@ $(document).ready(function() {
     console.log(input);
 
     var youtubeURL =
-    "https://www.googleapis.com/youtube/v3/search?part=snippet&safeSearch=moderate&q=" +
+      "https://www.googleapis.com/youtube/v3/search?part=snippet&safeSearch=moderate&q=" +
       input +
       "&type=video&order=relevance&maxResults=10&key=AIzaSyB9iTGjZQ4ys1x9-h2X2i_yoGON2u8YsCo";
     var hackerURL =
@@ -351,7 +352,7 @@ $(document).ready(function() {
       $.ajax({
         url: redditURL,
         method: "GET"
-      }).then(function(response) {
+      }).then(function (response) {
         var result = response.data.children;
         $("#redditInner").empty();
         for (var i = 0; i < result.length; i++) {
@@ -389,7 +390,7 @@ $(document).ready(function() {
       $.ajax({
         url: stackExchangeURL,
         method: "GET"
-      }).then(function(response) {
+      }).then(function (response) {
         var result = response.items;
         $("#stackExchangeInner").empty();
         for (var i = 0; i < result.length; i++) {
@@ -421,18 +422,18 @@ $(document).ready(function() {
           $(title).text(stackExchangeInner.dataset.title);
         }
         $("#stackExchangeInner").prepend(title);
-      
+
       });
     } else if ($(".disp-1").attr("id") === "hackerNewsInner") {
-     console.log(hackerURL);
+      console.log(hackerURL);
       $.ajax({
         url: hackerURL,
         method: "GET"
-      }).then(function(response) {
+      }).then(function (response) {
         var result = response.articles;
         $("#hackerNewsInner").empty();
         console.log(response);
-        
+
         for (var i = 0; i < result.length; i++) {
           var hackArticleDump = $("<div>");
 
@@ -472,7 +473,7 @@ $(document).ready(function() {
       $.ajax({
         url: youtubeURL,
         method: "GET"
-      }).then(function(response) {
+      }).then(function (response) {
         var result = response.items;
         $("#youTubeInner").empty();
         for (var i = 0; i < result.length; i++) {
@@ -514,7 +515,7 @@ $(document).ready(function() {
       $.ajax({
         url: nytURL,
         method: "GET"
-      }).then(function(response) {
+      }).then(function (response) {
         var result = response.response.docs;
         $("#nytInner").empty();
         for (var i = 0; i < result.length; i++) {
@@ -557,7 +558,7 @@ $(document).ready(function() {
       $.ajax({
         url: giphyURL,
         method: "GET"
-      }).then(function(response) {
+      }).then(function (response) {
         var results = response.data;
         $("#giphyInner").empty();
         // Looping over every result item
@@ -568,7 +569,7 @@ $(document).ready(function() {
           // Creating a paragraph tag with the result item's rating
 
           var personImage = $("<img class='col-sm-6 offset-sm-3 rounded'>");
-          
+
 
           // Giving the image tag an src attribute of a proprty pulled off the
           // result item
@@ -586,6 +587,10 @@ $(document).ready(function() {
         }
         $("#giphyInner").prepend(title);
       });
+    }
+    if (($("#giphy").data("state") === "inactive") && ($("#reddit").data("state") === "inactive") && ($("#stackExchange").data("state") === "inactive") && ($("#hackerNews").data("state") === "inactive") && ($("#youTube").data("state") === "inactive") && ($("#nyt").data("state") === "inactive") && $(".carousel-item").hasClass("active") === false) {
+      $("#startImage").show();
+
     }
   });
 });
