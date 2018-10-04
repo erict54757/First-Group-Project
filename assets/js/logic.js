@@ -1,6 +1,6 @@
 // on doc load
 $(document).ready(function() {
-  $(".carousel").carousel({interval:false});
+  
   //=============================================================================================================
   //call to initialize
   var app_firebase = {};
@@ -25,6 +25,7 @@ $(document).ready(function() {
 
   // sidebar button clicks w/api calls
   $(".button-check").on("click", function() {
+    $(".carousel").carousel({interval:false});
     $("#startImage").hide();
     var cardId = this.id + "Card";
     var innerId = this.id + "Inner";
